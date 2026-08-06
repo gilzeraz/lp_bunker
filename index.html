@@ -592,22 +592,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .wa-modal p{ font-size:14.5px; line-height:1.55; margin-bottom:22px; }
   .wa-modal .btn{ width:100%; }
 
-  /* ============ MODAL ETAPA 2 (informações da marca) ============ */
-  .step2-modal{
-    position:relative;
-    background:var(--branco); border-radius:16px;
-    max-width:460px; width:100%; max-height:88vh; overflow-y:auto;
-    padding:32px 28px 28px;
-    text-align:left;
-    transform:translateY(12px) scale(.98);
-    transition:transform .2s ease;
-    box-shadow:0 20px 60px rgba(0,0,0,.3);
-  }
-  .wa-modal-overlay.open .step2-modal{ transform:translateY(0) scale(1); }
-  .step2-modal h3{ margin-bottom:8px; padding-right:28px; }
-  .step2-intro{ font-size:14px; color:var(--cinza-escuro); margin-bottom:20px; }
-  .step2-modal .btn{ width:100%; margin-top:4px; }
-
+  /* ============ CAMPOS DE ESCOLHA ÚNICA (situação atual / quando pretende iniciar) ============ */
   .choice-label{ display:block; font-weight:700; font-size:13px; color:var(--preto); margin-bottom:8px; }
   .choice-group{ display:flex; flex-wrap:wrap; gap:6px; }
   .choice-option{
@@ -668,9 +653,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       <div class="hero-form-col">
         <div class="form-card">
           <h3>Solicite a análise inicial da sua marca</h3>
-          <p>Preencha os dados abaixo. Em seguida, pedimos algumas informações rápidas sobre sua marca para preparar a análise.</p>
+          <p>Preencha os dados abaixo. Nossa equipe entra em contato para entender sua marca e apresentar o resultado da análise.</p>
 
-          <form id="lead-form-etapa1" novalidate>
+          <form id="lead-form" novalidate>
             <div class="hp-field" aria-hidden="true">
               <label for="hp-check-x7">Não preencha este campo</label>
               <input type="text" id="hp-check-x7" name="hp-check-x7" tabindex="-1" autocomplete="new-password">
@@ -687,14 +672,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
               <label for="email">E-mail</label>
               <input type="email" id="email" name="email" required autocomplete="email">
             </div>
+            <div class="field">
+              <label for="nome-marca">Nome da marca</label>
+              <input type="text" id="nome-marca" name="nome_marca" required>
+            </div>
+            <div class="field">
+              <label for="segmento">Segmento ou atividade</label>
+              <input type="text" id="segmento" name="segmento" required>
+            </div>
+            <div class="field">
+              <label for="cnpj">CPF ou CNPJ</label>
+              <input type="text" id="cnpj" name="cnpj" required maxlength="18" inputmode="numeric" placeholder="CPF ou CNPJ">
+            </div>
+
+            <div class="field">
+              <span class="choice-label">Situação atual</span>
+              <div class="choice-group" role="radiogroup" aria-label="Situação atual">
+                <label class="choice-option"><input type="radio" name="situacao_atual" value="Ainda não iniciei o registro." required><span>Ainda não iniciei o registro.</span></label>
+                <label class="choice-option"><input type="radio" name="situacao_atual" value="Estou pesquisando como funciona."><span>Estou pesquisando como funciona.</span></label>
+                <label class="choice-option"><input type="radio" name="situacao_atual" value="Já tentei registrar."><span>Já tentei registrar.</span></label>
+                <label class="choice-option"><input type="radio" name="situacao_atual" value="Recebi oposição ou indeferimento."><span>Recebi oposição ou indeferimento.</span></label>
+                <label class="choice-option"><input type="radio" name="situacao_atual" value="Encontrei uma marca semelhante."><span>Encontrei uma marca semelhante.</span></label>
+                <label class="choice-option"><input type="radio" name="situacao_atual" value="Preciso proteger uma marca que já utilizo."><span>Preciso proteger uma marca que já utilizo.</span></label>
+              </div>
+            </div>
+
+            <div class="field">
+              <span class="choice-label">Quando pretende iniciar</span>
+              <div class="choice-group" role="radiogroup" aria-label="Quando pretende iniciar">
+                <label class="choice-option"><input type="radio" name="quando_iniciar" value="O quanto antes." required><span>O quanto antes.</span></label>
+                <label class="choice-option"><input type="radio" name="quando_iniciar" value="Nos próximos 30 dias."><span>Nos próximos 30 dias.</span></label>
+                <label class="choice-option"><input type="radio" name="quando_iniciar" value="Nos próximos 3 meses."><span>Nos próximos 3 meses.</span></label>
+                <label class="choice-option"><input type="radio" name="quando_iniciar" value="Ainda estou avaliando."><span>Ainda estou avaliando.</span></label>
+              </div>
+            </div>
 
             <label class="consent">
               <input type="checkbox" id="consent-contato" name="consent-contato" required>
               <span><span class="req">Obrigatório.</span> Concordo em fornecer meus dados para receber a análise inicial e ser contatado pela Bunker Marcas e Patentes. Seus dados não serão compartilhados com terceiros e você pode solicitar a exclusão a qualquer momento. Leia nossa <a href="https://bunker.adv.br/privacidade/" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
             </label>
 
-            <button type="submit" class="btn btn-primary">CONTINUAR</button>
-            <p class="form-status" id="form-status-etapa1"></p>
+            <button type="submit" class="btn btn-primary">SOLICITAR ANÁLISE INICIAL</button>
+            <p class="form-status" id="form-status">Recebemos seus dados. Nossa equipe entra em contato em breve.</p>
             <p style="font-size:12px;line-height:1.5;color:var(--cinza-escuro);margin-top:10px;">A análise inicial é realizada sem custo. Caso a marca apresente viabilidade, nossa equipe explicará a estratégia recomendada, as etapas do processo e o investimento necessário para o registro e acompanhamento.</p>
           </form>
         </div>
@@ -1157,55 +1176,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </svg>
 </a>
 
-<!-- ============ MODAL ETAPA 2 (informações da marca) ============ -->
-<div class="wa-modal-overlay" id="etapa2-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="etapa2-modal-title">
-  <div class="step2-modal">
-    <button type="button" class="wa-modal-close" id="etapa2-modal-close" aria-label="Fechar">&times;</button>
-    <h3 id="etapa2-modal-title">Só mais um passo: conte sobre sua marca</h3>
-    <p class="step2-intro">Essas informações ajudam nossa equipe a preparar a sua análise de viabilidade.</p>
-
-    <form id="lead-form-etapa2" novalidate>
-      <div class="field">
-        <label for="nome-marca">Nome da marca</label>
-        <input type="text" id="nome-marca" name="nome_marca" required>
-      </div>
-      <div class="field">
-        <label for="segmento">Segmento ou atividade</label>
-        <input type="text" id="segmento" name="segmento" required>
-      </div>
-      <div class="field">
-        <label for="cnpj">CPF ou CNPJ</label>
-        <input type="text" id="cnpj" name="cnpj" required maxlength="18" inputmode="numeric" placeholder="CPF ou CNPJ">
-      </div>
-
-      <div class="field">
-        <span class="choice-label">Situação atual</span>
-        <div class="choice-group" role="radiogroup" aria-label="Situação atual">
-          <label class="choice-option"><input type="radio" name="situacao_atual" value="Ainda não iniciei o registro." required><span>Ainda não iniciei o registro.</span></label>
-          <label class="choice-option"><input type="radio" name="situacao_atual" value="Estou pesquisando como funciona."><span>Estou pesquisando como funciona.</span></label>
-          <label class="choice-option"><input type="radio" name="situacao_atual" value="Já tentei registrar."><span>Já tentei registrar.</span></label>
-          <label class="choice-option"><input type="radio" name="situacao_atual" value="Recebi oposição ou indeferimento."><span>Recebi oposição ou indeferimento.</span></label>
-          <label class="choice-option"><input type="radio" name="situacao_atual" value="Encontrei uma marca semelhante."><span>Encontrei uma marca semelhante.</span></label>
-          <label class="choice-option"><input type="radio" name="situacao_atual" value="Preciso proteger uma marca que já utilizo."><span>Preciso proteger uma marca que já utilizo.</span></label>
-        </div>
-      </div>
-
-      <div class="field">
-        <span class="choice-label">Quando pretende iniciar</span>
-        <div class="choice-group" role="radiogroup" aria-label="Quando pretende iniciar">
-          <label class="choice-option"><input type="radio" name="quando_iniciar" value="O quanto antes." required><span>O quanto antes.</span></label>
-          <label class="choice-option"><input type="radio" name="quando_iniciar" value="Nos próximos 30 dias."><span>Nos próximos 30 dias.</span></label>
-          <label class="choice-option"><input type="radio" name="quando_iniciar" value="Nos próximos 3 meses."><span>Nos próximos 3 meses.</span></label>
-          <label class="choice-option"><input type="radio" name="quando_iniciar" value="Ainda estou avaliando."><span>Ainda estou avaliando.</span></label>
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-primary">SOLICITAR ANÁLISE INICIAL</button>
-      <p class="form-status" id="form-status-etapa2"></p>
-    </form>
-  </div>
-</div>
-
 <!-- ============ MODAL WHATSAPP (aparece após envio bem-sucedido do form) ============ -->
 <div class="wa-modal-overlay" id="wa-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="wa-modal-title">
   <div class="wa-modal">
@@ -1412,51 +1382,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     if (e.target === waModalOverlay) fecharWaModal();
   });
 
-  // ==========================================
-  // MODAL ETAPA 2 — abre após a etapa 1 (contato)
-  // ser validada com sucesso, para coletar os
-  // dados da marca antes do envio final.
-  // ==========================================
-  const etapa2ModalOverlay = document.getElementById('etapa2-modal-overlay');
-  const etapa2ModalClose = document.getElementById('etapa2-modal-close');
-
-  function abrirEtapa2Modal(){
-    etapa2ModalOverlay.classList.add('open');
-  }
-
-  function fecharEtapa2Modal(){
-    etapa2ModalOverlay.classList.remove('open');
-  }
-
-  etapa2ModalClose.addEventListener('click', fecharEtapa2Modal);
-  etapa2ModalOverlay.addEventListener('click', function(e){
-    if (e.target === etapa2ModalOverlay) fecharEtapa2Modal();
-  });
-
   document.addEventListener('keydown', function(e){
-    if (e.key !== 'Escape') return;
-    fecharWaModal();
-    fecharEtapa2Modal();
+    if (e.key === 'Escape') fecharWaModal();
   });
 
-  // Guarda os dados validados da etapa 1 até o envio final,
-  // que só acontece depois que a etapa 2 também for preenchida.
-  let leadStep1Data = null;
-
   // ============================================================
-  // ETAPA 1 — CONTATO (nome, whatsapp, e-mail). Não envia nada
-  // ao servidor ainda: só valida, guarda os dados e abre a
-  // etapa 2 (informações da marca).
+  // ENVIO DO FORMULÁRIO — nome, whatsapp, e-mail e as informações
+  // da marca são validados e enviados juntos, numa única etapa.
   // ============================================================
-  document.getElementById('lead-form-etapa1').addEventListener('submit', function(e){
+  document.getElementById('lead-form').addEventListener('submit', function(e){
     e.preventDefault();
 
-    const status = document.getElementById('form-status-etapa1');
+    const status = document.getElementById('form-status');
     status.classList.remove('ok', 'error');
 
     // Honeypot: se o campo escondido veio preenchido, é bot.
-    // Finge sucesso (sem enviar nada, sem abrir a etapa 2) para
-    // não revelar a defesa.
+    // Finge sucesso (sem enviar nada) para não revelar a defesa.
     const honeypot = document.getElementById('hp-check-x7');
     if (honeypot && honeypot.value.trim() !== '') {
       status.textContent = 'Recebemos seus dados. Nossa equipe entra em contato em breve.';
@@ -1477,15 +1418,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     const nomeEl = document.getElementById('nome');
     const emailEl = document.getElementById('email');
     const whatsappEl = document.getElementById('whatsapp');
+    const nomeMarcaEl = document.getElementById('nome-marca');
+    const segmentoEl = document.getElementById('segmento');
+    const cnpjEl = document.getElementById('cnpj');
     const consentEl = document.getElementById('consent-contato');
+    const situacaoEl = e.target.querySelector('input[name="situacao_atual"]:checked');
+    const quandoEl = e.target.querySelector('input[name="quando_iniciar"]:checked');
 
-    [nomeEl, emailEl, whatsappEl].forEach(function(el){
+    [nomeEl, emailEl, whatsappEl, nomeMarcaEl, segmentoEl, cnpjEl].forEach(function(el){
       el.closest('.field').classList.remove('invalid');
     });
 
     const nome = nomeEl.value.trim();
     const email = emailEl.value.trim();
     const whatsapp = whatsappEl.value.trim();
+    const nomeMarca = nomeMarcaEl.value.trim();
+    const segmento = segmentoEl.value.trim();
+    const cnpj = cnpjEl.value.trim();
 
     let valido = true;
 
@@ -1508,56 +1457,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       valido = false;
     }
 
-    // Consentimento LGPD é obrigatório
-    if (!consentEl.checked) {
-      valido = false;
-    }
-
-    if (!valido) {
-      status.textContent = 'Verifique os campos destacados: preencha todos os dados corretamente e aceite o consentimento para continuar.';
-      status.classList.add('error');
-      return;
-    }
-
-    leadStep1Data = { nome: nome, email: email, whatsapp: whatsapp };
-    document.getElementById('form-status-etapa2').classList.remove('ok', 'error');
-    abrirEtapa2Modal();
-  });
-
-  // ============================================================
-  // ETAPA 2 — INFORMAÇÕES DA MARCA. Valida os campos, junta com
-  // os dados da etapa 1 e só então faz o envio real ao Apps
-  // Script (planilha, e-mail, RD Station CRM e Conversions API).
-  // ============================================================
-  document.getElementById('lead-form-etapa2').addEventListener('submit', function(e){
-    e.preventDefault();
-
-    if (!leadStep1Data) {
-      // Segurança: se por algum motivo a etapa 1 não foi concluída,
-      // não deixa a etapa 2 ser enviada sozinha.
-      fecharEtapa2Modal();
-      return;
-    }
-
-    const status = document.getElementById('form-status-etapa2');
-    status.classList.remove('ok', 'error');
-
-    const nomeMarcaEl = document.getElementById('nome-marca');
-    const segmentoEl = document.getElementById('segmento');
-    const cnpjEl = document.getElementById('cnpj');
-    const situacaoEl = e.target.querySelector('input[name="situacao_atual"]:checked');
-    const quandoEl = e.target.querySelector('input[name="quando_iniciar"]:checked');
-
-    [nomeMarcaEl, segmentoEl, cnpjEl].forEach(function(el){
-      el.closest('.field').classList.remove('invalid');
-    });
-
-    const nomeMarca = nomeMarcaEl.value.trim();
-    const segmento = segmentoEl.value.trim();
-    const cnpj = cnpjEl.value.trim();
-
-    let valido = true;
-
     if (nomeMarca.length < 2) {
       nomeMarcaEl.closest('.field').classList.add('invalid');
       valido = false;
@@ -1575,8 +1474,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
       valido = false;
     }
 
+    // Consentimento LGPD é obrigatório
+    if (!consentEl.checked) {
+      valido = false;
+    }
+
     if (!valido) {
-      status.textContent = 'Verifique os campos destacados e selecione uma opção em cada pergunta.';
+      status.textContent = 'Verifique os campos destacados: preencha todos os dados corretamente, selecione uma opção em cada pergunta e aceite o consentimento para enviar.';
       status.classList.add('error');
       return;
     }
@@ -1588,9 +1492,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         const eventId = crypto.randomUUID();
 
         const data = {
-            nome: leadStep1Data.nome,
-            email: leadStep1Data.email,
-            whatsapp: leadStep1Data.whatsapp,
+            nome: nome,
+            email: email,
+            whatsapp: whatsapp,
             cnpj: cnpj,
             nome_marca: nomeMarca,
             segmento: segmento,
@@ -1635,11 +1539,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           status.textContent = 'Recebemos seus dados. Nossa equipe entra em contato em breve.';
           status.classList.add('ok');
           e.target.reset();
-          document.getElementById('lead-form-etapa1').reset();
           if (submitBtn) submitBtn.disabled = false;
-          fecharEtapa2Modal();
-          abrirWaModal(leadStep1Data.nome);
-          leadStep1Data = null;
+          abrirWaModal(nome);
         }
 
     if (submitBtn) submitBtn.disabled = true;
